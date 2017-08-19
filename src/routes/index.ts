@@ -51,7 +51,7 @@ export class IndexRoute extends BaseRoute {
 
     //set options
     let options: Object = {
-      "message": "Welcome to the Tour of Heros"
+      "message": "MEAN App With TypeScript Support"
     };
 
     //render template
