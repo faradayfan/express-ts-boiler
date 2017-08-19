@@ -46,15 +46,6 @@ export class IndexRoute extends BaseRoute {
    * @next {NextFunction} Execute the next method.
    */
   public index(req: Request, res: Response, next: NextFunction) {
-    //set custom title
-    this.title = "Home | Tour of Heros";
-
-    //set options
-    let options: Object = {
-      "message": "MEAN App With TypeScript Support"
-    };
-
-    //render template
-    this.render(req, res, "index", options);
+    this.send(req, res, {message: "Hello!"});
   }
 }

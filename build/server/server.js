@@ -1,22 +1,19 @@
-import * as bodyParser from "body-parser";
-import * as cookieParser from "cookie-parser";
-import * as express from "express";
-import * as logger from "morgan";
-import * as path from "path";
-import errorHandler = require("errorhandler");
-import methodOverride = require("method-override");
-
-import { IndexRoute } from "./routes/index";
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const express = require("express");
+const logger = require("morgan");
+const path = require("path");
+const errorHandler = require("errorhandler");
+const methodOverride = require("method-override");
+const index_1 = require("./routes/index");
 /**
  * The server.
  *
  * @class Server
  */
-export class Server {
-
-    public app: express.Application;
-
+class Server {
     /**
      * Bootstrap the application.
      *
@@ -25,10 +22,9 @@ export class Server {
      * @static
      * @return {ng.auto.IInjectorService} Returns the newly created injector for this app.
      */
-    public static bootstrap(): Server {
+    static bootstrap() {
         return new Server();
     }
-
     /**
      * Constructor.
      *
@@ -38,68 +34,54 @@ export class Server {
     constructor() {
         //create expressjs application
         this.app = express();
-
         //configure application
         this.config();
-
         //add routes
         this.routes();
-
         //add api
         this.api();
     }
-
     /**
      * Create REST API routes
      *
      * @class Server
      * @method api
      */
-    public api() {
+    api() {
         //empty for now
     }
-
     /**
      * Configure application
      *
      * @class Server
      * @method config
      */
-    public config() {
+    config() {
         //add static paths
         this.app.use(express.static(path.join(__dirname, "public")));
-
         //configure pug
-        this.app.set("views", path.join(__dirname, "views"));
-        this.app.set("view engine", "hbs");
-
+        //this.app.set("views", path.join(__dirname, "views"));
+        //this.app.set("view engine", "hbs");
         //use logger middlware
         this.app.use(logger("dev"));
-
         //use json form parser middlware
         this.app.use(bodyParser.json());
-
         //use query string parser middlware
         this.app.use(bodyParser.urlencoded({
             extended: true
         }));
-
         //use cookie parser middleware
         this.app.use(cookieParser("SECRET_GOES_HERE"));
-
         //use override middlware
         this.app.use(methodOverride());
-
         //catch 404 and forward to error handler
-        this.app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
+        this.app.use(function (err, req, res, next) {
             err.status = 404;
             next(err);
         });
-
         //error handling
         this.app.use(errorHandler());
     }
-
     /**
   * Create router.
   *
@@ -107,14 +89,14 @@ export class Server {
   * @method config
   * @return void
   */
-    private routes() {
-        let router: express.Router;
+    routes() {
+        let router;
         router = express.Router();
-
         //IndexRoute
-        IndexRoute.create(router);
-
+        index_1.IndexRoute.create(router);
         //use router middleware
         this.app.use(router);
     }
 }
+exports.Server = Server;
+//# sourceMappingURL=server.js.map
