@@ -4,7 +4,7 @@
   "description": "Boilerplate Express app with typescript support",
   "scripts": {
     "dev": "SET NODE_ENV=development && nodemon ./bin/www",
-    "grunt": "grunt",
+    "grunt": "grunt watch",
     "start": "node ./bin/www"
   },
   "author": "John Miller",
